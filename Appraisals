@@ -27,5 +27,7 @@ appraise 'sidekiq-7.0' do
 end
 
 appraise 'sidekiq-master' do
+  ruby '3.2.0' # latest version only works with 3.2.0 and above
+
   gem 'sidekiq', github: 'mperham/sidekiq'
 end
