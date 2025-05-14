@@ -25,7 +25,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - { ruby_version: 3.3.6 }
+          - { ruby_version: 3.2.0 }
     steps:
       - uses: actions/checkout@v3
 
