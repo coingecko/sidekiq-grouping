@@ -16,6 +16,9 @@ Useful for:
 *NOTE:* As of 1.0.6 works with Sidekiq 4.
 *NOTE:* As of 1.0.8 Locking is atomic (set nx/ex) and will no longer lead to batches that are permalocked and stuck
 
+## Ruby Version
+- This gem is only compatible with all versions on Sidekiq for Ruby 3.3.6 and above.
+
 ## Usage
 
 Create a worker:
