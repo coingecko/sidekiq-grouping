@@ -14,6 +14,16 @@ class BatchedSizeWorker
   def perform(foo); end
 end
 
+class RetryBatchedWorker
+  include Sidekiq::Worker
+
+  sidekiq_options(
+    retry: 5, queue: :retry_batched, batch_flush_size: 3, batch_size: 3
+  )
+
+  def perform(foo); end
+end
+
 class BatchedIntervalWorker
   include Sidekiq::Worker
 
