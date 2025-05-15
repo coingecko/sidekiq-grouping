@@ -55,7 +55,7 @@ module Sidekiq
 
         chunk.each_slice(chunk_size) do |subchunk|
           Sidekiq::Client.push(
-            "class" => @worker_class,
+            "class" => @worker_class.constantize,
             "queue" => @queue,
             "args" => [true, subchunk]
           )

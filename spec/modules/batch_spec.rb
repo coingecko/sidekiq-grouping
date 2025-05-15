@@ -16,6 +16,15 @@ describe Sidekiq::Grouping::Batch do
       expect_batch(BatchedSizeWorker, "batched_size")
     end
 
+    it "worker should honour specified retry in sidekiq_options" do
+      RetryBatchedWorker.perform_async("bar")
+
+      Sidekiq::Grouping.force_flush_for_test!
+
+      # specified in test_workers
+      expect(RetryBatchedWorker.jobs.last["retry"]).to eq(5)
+    end
+
     it "must not enqueue batched worker based on interval setting" do
       BatchedIntervalWorker.perform_async("bar")
       expect_batch(BatchedIntervalWorker, "batched_interval")
