@@ -38,15 +38,16 @@ module Sidekiq
       def flush_concrete(batches)
         return if batches.empty?
 
-        names = batches.map do |batch|
-          "#{batch.worker_class} in #{batch.queue}"
-        end
-        unless Sidekiq::Grouping::Config.tests_env
-          Sidekiq::Grouping.logger.info(
-            "[Sidekiq::Grouping] Trying to flush batched queues: " \
-            "#{names.join(',')}"
-          )
-        end
+        # Comment out logging code since it can be noisy in production
+        # names = batches.map do |batch|
+        #   "#{batch.worker_class} in #{batch.queue}"
+        # end
+        # unless Sidekiq::Grouping::Config.tests_env
+        #   Sidekiq::Grouping.logger.info(
+        #     "[Sidekiq::Grouping] Trying to flush batched queues: " \
+        #     "#{names.join(',')}"
+        #   )
+        # end
         batches.each(&:flush)
       end
     end
